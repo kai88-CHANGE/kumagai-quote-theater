@@ -121,9 +121,11 @@ function syncAudioUI() {
 
 async function playAudioAt(seconds = null) {
   if (!conferenceAudio) return;
-  if (Number.isFinite(seconds)) conferenceAudio.currentTime = Math.min(seconds, conferenceAudio.duration || seconds);
+  const target = Number.isFinite(seconds) ? seconds : null;
+  if (target !== null) conferenceAudio.currentTime = Math.min(target, conferenceAudio.duration || target);
   try { await conferenceAudio.play(); }
   catch { showToast('音声を再生できませんでした'); }
+  if (target !== null && Number.isFinite(conferenceAudio.duration)) conferenceAudio.currentTime = Math.min(target, conferenceAudio.duration);
   syncAudioUI();
 }
 
