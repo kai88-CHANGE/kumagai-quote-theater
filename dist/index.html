@@ -55,7 +55,7 @@
         <div class="audio-copy">
           <p class="eyebrow">LISTEN TO THE PRESS CONFERENCE</p>
           <h2 id="audio-title">会見の声を、<br /><span>そのまま聴く。</span></h2>
-          <p>提供された2026年11月2日の会見音声です。語録カードの「聴く」から、該当時刻付近を再生できます。</p>
+          <p>提供された2026年11月2日の会見音声です。語録カードの「聴く」から、その発言だけをすぐに再生できます。</p>
         </div>
         <div class="audio-control">
           <button class="audio-toggle" id="audioToggle" type="button" aria-pressed="false">
@@ -65,6 +65,7 @@
           <input class="audio-progress" id="audioProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="音声の再生位置" />
           <div class="audio-time"><span id="audioStatus">停止中</span><span><b id="audioCurrent">00:00</b> / <b id="audioDuration">--:--</b></span></div>
           <audio id="conferenceAudio" preload="metadata" src="assets/gmo-press-conference.mp3"></audio>
+          <audio id="quoteAudio" preload="none"></audio>
         </div>
       </section>
 
@@ -104,7 +105,7 @@
         <div>
           <p class="eyebrow">THE LAST LINE</p>
           <h2>あなたの命の砂時計に、<br /><em>この一言を。</em></h2>
-          <p>会見の文字起こしをもとに、印象的な発言を編集したファン向けの語録集です。本人発言と、報道・ネット上の反応は分けて表示しています。今回確認できた文字起こしは02:49:34頃までで、それ以降の発言は推測で補っていません。</p>
+          <p>会見の文字起こしをもとに、印象的な発言を編集したファン向けの語録集です。本人発言と、報道・ネット上の反応は分けて表示しています。語録の時刻と話者は、提供されたタイムスタンプ付き文字起こしと音声を照合しています。</p>
         </div>
       </section>
     </main>
