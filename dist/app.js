@@ -1,31 +1,31 @@
 const quotes = [
-  { text: "今のこの社会的な混乱は、まだプロローグでしかない。", tag: "映画っぽい", cat: "movie", note: "THE PROLOGUE", hot: true },
-  { text: "以前は拳銃でした。今は機関銃です。", tag: "映画っぽい", cat: "movie", note: "ESCALATION", hot: true },
-  { text: "このインターネットを、人々の、日本の、世界の宝物として、きれいにしてから死んでいきたいと思います。", tag: "映画っぽい", cat: "movie", note: "THE LAST MISSION", hot: true },
-  { text: "僕は命かけて、この産業を多くの方の笑顔のツールにしてから死ぬつもりです。", tag: "映画っぽい", cat: "movie", note: "FINAL LINE", hot: true },
-  { text: "この業界から撤退し、『あとは任せたよ』なんて言えません。", tag: "映画っぽい", cat: "movie", note: "NO RETREAT", hot: false },
-  { text: "以前はピンポイント爆撃でした。今は絨毯爆撃です。", tag: "映画っぽい", cat: "movie", note: "THE ATTACK", hot: false },
-  { text: "皆さんの武器のペンは、この事実を書いていただきたい。", tag: "映画っぽい", cat: "movie", note: "THE PRESS", hot: false },
-  { text: "AIが攻撃者にはAIを。", tag: "おーっと", cat: "ai", note: "COUNTERMEASURE", hot: true },
-  { text: "スピードは曲線ではありません。垂直です。", tag: "おーっと", cat: "ai", note: "VERTICAL", hot: true },
-  { text: "日進月歩ならぬ、秒進分歩です。", tag: "おーっと", cat: "ai", note: "NEW SPEED", hot: false },
-  { text: "もはや、スピードの障害になっているのは人間という時代が訪れました。", tag: "おーっと", cat: "ai", note: "THE BOTTLENECK", hot: true },
-  { text: "今の日本のインターネットを守るには、サイバーイージスしかないと思っています。", tag: "おーっと", cat: "ai", note: "CYBER AEGIS", hot: false },
-  { text: "IPを止めればいいんですよ。", tag: "おーっと", cat: "ai", note: "SIMPLE ANSWER", hot: true },
-  { text: "一歩たりとも犯罪者に、お金を払うことはしない。", tag: "おーっと", cat: "ai", note: "NO RANSOM", hot: false },
+  { text: "ちょっとすまん、武信くん、ちゃんとボタン閉めてください。あなたお詫びをしているのに、ボタン開けてどうすんだ？", tag: "ネタ・会見", cat: "funny", note: "DRESS CODE", hot: true },
   { text: "同じ回答をすると、皆様の命の砂時計を無駄遣いします。", tag: "ネタ・会見", cat: "funny", note: "TIME MANAGEMENT", hot: true },
-  { text: "ちょっとすまん、竹信くん、ちゃんとボタン閉めてください。あなたお詫びをしているのに、ボタン開けてどうすんだ？", tag: "ネタ・会見", cat: "funny", note: "DRESS CODE", hot: true },
-  { text: "私の仮説ですが、早い時間にお越しになった方は中央におられるのではないか。", tag: "ネタ・会見", cat: "funny", note: "FAIRNESS THEORY", hot: false },
+  { text: "IPを止めればいいんですよ。", tag: "おーっと", cat: "ai", note: "SIMPLE ANSWER", hot: true },
+  { text: "私の仮説ですが、早い時間にお越しになった方は中央におられるのではないか。", tag: "ネタ・会見", cat: "funny", note: "FAIRNESS THEORY", hot: true },
   { text: "フェアに、早く来られた記者様から前列から左右一段ずつ行きます。", tag: "ネタ・会見", cat: "funny", note: "THE ORDER", hot: false },
   { text: "社員さんは禁止用語です。", tag: "ネタ・会見", cat: "funny", note: "HOUSE RULES", hot: false },
   { text: "子会社は禁止用語です。", tag: "ネタ・会見", cat: "funny", note: "HOUSE RULES", hot: false },
   { text: "クマの耳という制度を自分で作っておりまして、8000人が私にダイレクトに連絡できます。", tag: "ネタ・会見", cat: "funny", note: "KUMA'S EAR", hot: false },
   { text: "ランチのおかずがまずいという話があれば、業者さんと交渉します。", tag: "ネタ・会見", cat: "funny", note: "LUNCH CRISIS", hot: false },
+  { text: "今のこの社会的な混乱は、まだプロローグでしかない。", tag: "映画っぽい", cat: "movie", note: "THE PROLOGUE", hot: true },
+  { text: "以前は拳銃でした。今は機関銃です。", tag: "映画っぽい", cat: "movie", note: "ESCALATION", hot: true },
+  { text: "AIが攻撃者にはAIを。", tag: "おーっと", cat: "ai", note: "COUNTERMEASURE", hot: true },
+  { text: "スピードは曲線ではありません。垂直です。", tag: "おーっと", cat: "ai", note: "VERTICAL", hot: true },
+  { text: "日進月歩ならぬ、秒進分歩です。", tag: "おーっと", cat: "ai", note: "NEW SPEED", hot: false },
+  { text: "もはや、スピードの障害になっているのは人間という時代が訪れました。", tag: "おーっと", cat: "ai", note: "THE BOTTLENECK", hot: true },
+  { text: "ちょっと知識があれば、高校生でも、下手すると中学生でも犯罪者になることができるツールです。", tag: "おーっと", cat: "ai", note: "NEXT GENERATION", hot: false },
+  { text: "以前はピンポイント爆撃でした。今は絨毯爆撃です。", tag: "映画っぽい", cat: "movie", note: "THE ATTACK", hot: false },
+  { text: "このインターネットを、人々の、日本の、世界の宝物として、きれいにしてから死んでいきたいと思います。", tag: "映画っぽい", cat: "movie", note: "THE LAST MISSION", hot: true },
+  { text: "僕は命かけて、この産業を多くの方の笑顔のツールにしてから死ぬつもりです。", tag: "映画っぽい", cat: "movie", note: "FINAL LINE", hot: true },
+  { text: "この業界から撤退し、『あとは任せたよ』なんて言えません。", tag: "映画っぽい", cat: "movie", note: "NO RETREAT", hot: false },
+  { text: "皆さんの武器のペンは、この事実を書いていただきたい。", tag: "映画っぽい", cat: "movie", note: "THE PRESS", hot: false },
   { text: "命の砂時計を何に捧げているのかというのが人生です。", tag: "おーっと", cat: "wow", note: "LIFE TIMER", hot: true },
   { text: "990分のカウントダウン。命の砂時計。", tag: "おーっと", cat: "wow", note: "990 MINUTES", hot: true },
+  { text: "一歩たりとも犯罪者に、お金を払うことはしない。", tag: "おーっと", cat: "ai", note: "NO RANSOM", hot: false },
+  { text: "私は31年間、一度たりとも、もうかる、もうけるという言葉を使ったことはありません。", tag: "理念・経営", cat: "wow", note: "31 YEARS", hot: true },
   { text: "お客様の笑顔が基準です。", tag: "理念・経営", cat: "wow", note: "THE STANDARD", hot: false },
   { text: "利益は目的ではなく、結果です。", tag: "理念・経営", cat: "wow", note: "THE RESULT", hot: false },
-  { text: "私は31年間、一度たりとも、もうかる、もうけるという言葉を使ったことはありません。", tag: "理念・経営", cat: "wow", note: "31 YEARS", hot: true },
   { text: "自分の失敗をお客さんに迷惑をかけて、その話をすり替えるつもりは1ミリもありません。", tag: "理念・経営", cat: "wow", note: "NO SPIN", hot: false },
 ];
 
@@ -37,7 +37,7 @@ let activeFilter = 'all';
 
 function cardTemplate(item, index) {
   return `<article class="quote-card ${item.hot ? 'standout' : ''}" data-index="${index}">
-    <span class="accent">${item.hot ? '✦' : '✧'}</span>
+    <span class="rank">${String(index + 1).padStart(2, '0')}</span>
     <div><div class="card-tag">${item.tag}</div><blockquote>「${item.text}」</blockquote></div>
     <div class="card-footer"><span class="source">${item.note}</span><button class="copy-btn" data-copy="${escapeAttr(item.text)}" type="button">COPY ⧉</button></div>
   </article>`;
