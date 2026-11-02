@@ -32,6 +32,37 @@ const quotes = [
   { text: "自分の失敗をお客さんに迷惑をかけて、その話をすり替えるつもりは1ミリもありません。", tag: "理念・経営", cat: "wow", note: "NO SPIN", time: "00:58:13頃", scene: "AIや社会の危機を語る第2部が、自社の不正アクセスの言い訳ではないと線引きした場面。", meaning: "大きな社会論を語りながら、自社の責任から逃げないという釘を自分で刺しています。" },
 ];
 
+const contextByIndex = [
+  { before: "ご質問のご回答に関しましてですが、おっしゃるとおり、設定不備による今回のインシデントでございます。", after: "申し訳ありません。はい。" },
+  { before: "あと事業の継続性とか、そういうものを優先したということはないのか、判断に影響があったかかはなかったのか、教えてください。", after: "なるべく違うご質問でご質問いただけたらよろしいかと思います。" },
+  { before: "サイバーイージスは。", after: "総務省さんがキャリアに言って、犯罪のIPだから止めろと。" },
+  { before: "高木様以上よろしいでしょうか。はい。それでは皆様、えっと、私の仮説ですが、", after: "今から二周目に入りますが、えー、もしよろしければ同じ順番で。" },
+  { before: "高木様以上よろしいでしょうか。はい。それでは皆様、えっと、私の仮説ですが、", after: "今から二周目に入りますが、えー、もしよろしければ同じ順番で。" },
+  { before: "現在、上場企業12社を中心とした158社で構成されております。", after: "グループ会社、世でよく買収とかM&Aという言葉がありますが、私たちはそれは仲間づくりと呼んでおりまして、" },
+  { before: "関わる社員さん。", after: "グループ会社、世でよく買収とかM&Aという言葉がありますが、私たちはそれは仲間づくりと呼んでおりまして、" },
+  { before: "この、えー、結論はイエスです。", after: "で、そこの、えー、全部を返信するのは難しいですが、これぞというものには私が直接返信をしたりする仕組みもございます。" },
+  { before: "グループの総務部が全力でそれを改善するためにビルと交渉したり。", after: "グループの仲間たちの声を集める仕組みとして現実に機能を果たしております。" },
+  { before: "それで、この情報漏洩の毎日、どこかのお会社が毎日情報漏洩です。", after: "締めで今回私の反省と結論を申し上げたいと思います。" },
+  { before: "皆様、犯罪者の攻撃は、以前は、", after: "戦争に例えると、以前はピンポイント爆撃でした。" },
+  { before: "ただ、それは三大AIの競合みたいになってしまうといけないので、そうならない枠組みでできたらいいなと。", after: "悪いことしてるのを察知して、それをサイバーイージスで止めるっていうのは、" },
+  { before: "それがスピードが。", after: "特にこの半年間、激しいスピードで変わっています。" },
+  { before: "日進月歩ならぬ。", after: "秒針奮励という、そういうようなイメージ感でおります。" },
+  { before: "計算リソースがあれば無限大に増やすことができるんです。", after: "いつも皆様のAIも皆様の指示待ってるはずです。" },
+  { before: "一万二千亜種コピーされて、1万2000件も世界中に拡散し、", after: "それどころか、これを見本に同じようなツールが複数開発され、" },
+  { before: "今は機関銃です。", after: "テロに例えるなら、今は無差別殺人ですよ。" },
+  { before: "きれいにしてから死んでいきたいと思います。", after: "以上です。" },
+  { before: "この業界から撤退し。", after: "僕は命かけてこの産業を多くの方の笑顔のツールにしてから死ぬつもりです。" },
+  { before: "この業界から撤退し。", after: "僕は命かけてこの産業を多くの方の笑顔のツールにしてから死ぬつもりです。" },
+  { before: "ければ、犯罪者の汚染でインターネットが使えなくなってしまいます。", after: "人や企業や、そして国家がこのスピードに合わせられるように変化を促していただきたいと願っております。" },
+  { before: "なんと1日990分しかありません。", after: "ということです。田子さんの回答になりましたでしょうか。" },
+  { before: "人に寿命がある以上、時間は命です。1日は1440分ですけれど、24時間は。", after: "命の砂時計を何に捧げているのかというのが人生であり、私はインターネットとこのグループに捧げてます。" },
+  { before: "皆様の生活を、企業を、社会を脅かしているんです。", after: "助長するようなことはしません。永久に支払わないと申し上げたのはそういうことです。" },
+  { before: "目的ではなく結果としての利益で株主様も笑顔になると、31年間ずっと言い続けてきました。", after: "8300人にご確認ください。" },
+  { before: "私どもは基準が儲かる、儲ける31年間一度も言ったことないです。", after: "まずは桑畑様の今のいくつかの質問のうちの一つ目です。" },
+  { before: "私たちは誇りを持ち、", after: "8300人にご確認ください。" },
+  { before: "人や企業や、そして国家がこのスピードに合わせられるように変化を促していただきたいと願っております。", after: "ただ、私が感じていることを31年間、" },
+];
+
 const grid = document.querySelector('#quoteGrid');
 const empty = document.querySelector('#emptyState');
 const search = document.querySelector('#searchInput');
@@ -48,16 +79,20 @@ function cardTemplate(item, index) {
   const detailId = `quote-detail-${index}`;
   const source = item.sourceUrl ? `<a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">${item.sourceLabel} ↗</a>` : '';
   const life = item.life ? `<div class="detail-block"><span>人物・哲学からの補足</span><p>${item.life}</p>${source ? `<p class="detail-source">${source}</p>` : ''}</div>` : '';
+  const context = contextByIndex[index];
+  const contextHtml = context ? `<div class="detail-block context-block"><span>前後の発言（前後約30秒の目安）</span><div class="context-lines"><div class="context-line"><b>直前</b><p>${escapeAttr(context.before)}</p></div><div class="context-line"><b>直後</b><p>${escapeAttr(context.after)}</p></div></div></div>` : '';
   const clipPath = `assets/quotes/quote-${String(index + 1).padStart(2, '0')}.mp3`;
   const listen = `<button class="quote-audio-btn" data-play-clip="${clipPath}" type="button">▶ 聴く</button>`;
   return `<article class="quote-card ${item.hot ? 'standout' : ''}" data-index="${index}" tabindex="0" role="button" aria-expanded="false" aria-controls="${detailId}">
     <span class="rank">${String(index + 1).padStart(2, '0')}</span>
     <div class="quote-main"><div class="card-tag">${item.tag}</div><blockquote>「${item.text}」</blockquote></div>
     <div class="card-footer"><span class="source">${item.note}</span><span class="tap-hint">TAP DETAILS</span>${listen}<button class="copy-btn" data-copy="${escapeAttr(item.text)}" type="button">COPY ⧉</button></div>
+    <audio class="quote-clip-audio" preload="auto" src="${clipPath}" data-clip-path="${clipPath}" aria-hidden="true"></audio>
     <div class="quote-detail" id="${detailId}" hidden>
       <div class="detail-block"><span>会見での背景 ${item.time ? `／ ${item.time}` : ''}</span><p>${item.scene}</p></div>
       <div class="detail-block"><span>この一言の見どころ</span><p>${item.meaning}</p></div>
       <div class="detail-block audio-proof"><span>音声照合</span><p>話者：熊谷 ／ ${item.time || '時刻確認済み'}<br />この語録専用の音声を再生できます。</p></div>
+      ${contextHtml}
       ${life}
     </div>
   </article>`;
@@ -76,6 +111,9 @@ function render() {
     return matchesFilter && matchesSearch;
   });
   grid.innerHTML = filtered.map((item) => cardTemplate(item, quotes.indexOf(item))).join('');
+  grid.querySelectorAll('.quote-clip-audio').forEach((player) => {
+    ['loadedmetadata', 'timeupdate', 'play', 'pause', 'ended'].forEach((eventName) => player.addEventListener(eventName, syncAudioUI));
+  });
   empty.hidden = filtered.length !== 0;
 }
 
@@ -94,7 +132,6 @@ async function copyText(text, button) {
 }
 
 const conferenceAudio = document.querySelector('#conferenceAudio');
-const quoteAudio = document.querySelector('#quoteAudio');
 const audioToggle = document.querySelector('#audioToggle');
 const audioProgress = document.querySelector('#audioProgress');
 const audioStatus = document.querySelector('#audioStatus');
@@ -117,7 +154,7 @@ function syncAudioUI() {
   const playing = !player.paused && !player.ended;
   audioToggle?.setAttribute('aria-pressed', String(playing));
   if (audioToggle) audioToggle.querySelector('.audio-play').textContent = playing ? 'Ⅱ' : '▶';
-  if (audioStatus) audioStatus.textContent = playing ? (player === quoteAudio ? '語録音声を再生中' : '再生中') : (player.ended ? '再生完了' : '停止中');
+  if (audioStatus) audioStatus.textContent = playing ? (player !== conferenceAudio ? '語録音声を再生中' : '再生中') : (player.ended ? '再生完了' : '停止中');
   if (audioCurrent) audioCurrent.textContent = formatAudioTime(player.currentTime);
   if (audioDuration) audioDuration.textContent = formatAudioTime(player.duration);
   if (audioProgress && Number.isFinite(player.duration) && player.duration > 0) audioProgress.value = String((player.currentTime / player.duration) * 100);
@@ -125,7 +162,7 @@ function syncAudioUI() {
 
 async function playAudioAt(seconds = null) {
   if (!conferenceAudio) return;
-  quoteAudio?.pause();
+  document.querySelectorAll('.quote-clip-audio').forEach((player) => player.pause());
   activePlayer = conferenceAudio;
   const target = Number.isFinite(seconds) ? seconds : null;
   if (target !== null) conferenceAudio.currentTime = Math.min(target, conferenceAudio.duration || target);
@@ -136,19 +173,20 @@ async function playAudioAt(seconds = null) {
 }
 
 async function playQuoteClip(path) {
-  if (!quoteAudio) return;
+  const clip = [...document.querySelectorAll('.quote-clip-audio')].find((player) => player.dataset.clipPath === path);
+  if (!clip) return;
   conferenceAudio?.pause();
-  activePlayer = quoteAudio;
-  quoteAudio.src = path;
-  quoteAudio.load();
-  try { await quoteAudio.play(); }
+  document.querySelectorAll('.quote-clip-audio').forEach((player) => { if (player !== clip) player.pause(); });
+  clip.currentTime = 0;
+  activePlayer = clip;
+  try { await clip.play(); }
   catch { showToast('音声を再生できませんでした'); }
   syncAudioUI();
 }
 
 audioToggle?.addEventListener('click', () => {
   if (activePlayer !== conferenceAudio) {
-    quoteAudio?.pause();
+    activePlayer?.pause();
     activePlayer = conferenceAudio;
   }
   if (conferenceAudio?.paused) playAudioAt();
@@ -165,11 +203,6 @@ conferenceAudio?.addEventListener('timeupdate', syncAudioUI);
 conferenceAudio?.addEventListener('play', syncAudioUI);
 conferenceAudio?.addEventListener('pause', syncAudioUI);
 conferenceAudio?.addEventListener('ended', syncAudioUI);
-quoteAudio?.addEventListener('loadedmetadata', syncAudioUI);
-quoteAudio?.addEventListener('timeupdate', syncAudioUI);
-quoteAudio?.addEventListener('play', syncAudioUI);
-quoteAudio?.addEventListener('pause', syncAudioUI);
-quoteAudio?.addEventListener('ended', syncAudioUI);
 
 function toggleCard(card, force) {
   const detail = card.querySelector('.quote-detail');

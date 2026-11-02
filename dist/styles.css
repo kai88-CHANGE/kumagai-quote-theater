@@ -113,11 +113,16 @@ body { background: #fff; color: var(--ink); }
 .quote-detail[hidden] { display: none; }
 .detail-block span { display: block; color: #0066cc; font-family: var(--mono); font-size: 9px; letter-spacing: .05em; margin-bottom: 7px; }
 .detail-block p { margin: 0; color: #5f5f63; font-size: 12px; line-height: 1.8; }
+.context-block { grid-column: 1 / -1; }
+.context-lines { display: grid; gap: 8px; }
+.context-line { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 12px; padding: 8px 10px; border-left: 2px solid #d7e6f8; background: #f7f9fc; }
+.context-line b { color: #0066cc; font-family: var(--mono); font-size: 9px; font-weight: 500; padding-top: 3px; }
+.context-line p { font-size: 11px; line-height: 1.7; }
 .detail-source { margin-top: 8px !important; font-size: 10px !important; }
 .detail-source a { color: #0066cc; text-decoration: underline; text-underline-offset: 3px; }
 .quote-card .card-footer { min-width: 0; }
 @media (max-width: 800px) { .quote-detail { grid-template-columns: 1fr; gap: 15px; } }
-@media (max-width: 510px) { .tap-hint { font-size: 7px; }.quote-detail { padding-top: 14px; }.detail-block p { font-size: 11px; line-height: 1.75; } }
+@media (max-width: 510px) { .tap-hint { font-size: 7px; }.quote-detail { padding-top: 14px; }.detail-block p { font-size: 11px; line-height: 1.75; }.context-line { grid-template-columns: 35px minmax(0, 1fr); gap: 8px; padding: 8px; } }
 
 /* Audio controls for the supplied press-conference recording. */
 .audio-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; padding: 66px 0; }
@@ -136,6 +141,7 @@ body { background: #fff; color: var(--ink); }
 .quote-audio-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 92px; min-height: 34px; padding: 8px 12px; border: 1px solid #0066cc; border-radius: 9999px; background: #0066cc; color: #fff; cursor: pointer; font-family: var(--sans); font-size: 11px; font-weight: 600; transition: background .2s, transform .2s; }
 .quote-audio-btn:hover { background: #0071e3; transform: translateY(-1px); }
 .quote-audio-btn:focus-visible { outline: 3px solid rgba(0,102,204,.24); outline-offset: 2px; }
+.quote-clip-audio { display: none; }
 .audio-proof { grid-column: 1 / -1; padding-top: 13px; border-top: 1px solid #e0e0e0; }
 @media (max-width: 800px) { .audio-panel { grid-template-columns: 1fr; gap: 28px; padding: 52px 0; } }
 @media (max-width: 510px) { .quote-card .card-footer { flex-wrap: wrap; gap: 10px 12px; }.quote-card .source { width: 100%; }.quote-audio-btn { min-height: 36px; flex: 1; }.quote-card .copy-btn { padding: 8px 2px; } }
