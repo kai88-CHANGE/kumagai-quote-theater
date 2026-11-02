@@ -113,16 +113,18 @@ body { background: #fff; color: var(--ink); }
 .quote-detail[hidden] { display: none; }
 .detail-block span { display: block; color: #0066cc; font-family: var(--mono); font-size: 9px; letter-spacing: .05em; margin-bottom: 7px; }
 .detail-block p { margin: 0; color: #5f5f63; font-size: 12px; line-height: 1.8; }
-.context-block { grid-column: 1 / -1; }
-.context-lines { display: grid; gap: 8px; }
-.context-line { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 12px; padding: 8px 10px; border-left: 2px solid #d7e6f8; background: #f7f9fc; }
-.context-line b { color: #0066cc; font-family: var(--mono); font-size: 9px; font-weight: 500; padding-top: 3px; }
-.context-line p { font-size: 11px; line-height: 1.7; }
+.flow-block { grid-column: 1 / -1; }
+.flow-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: flow; }
+.flow-list li { display: grid; grid-template-columns: 28px 76px minmax(0, 1fr); gap: 10px; align-items: start; padding: 9px 10px; border-left: 2px solid #d7e6f8; background: #f7f9fc; counter-increment: flow; }
+.flow-list li::before { content: counter(flow, decimal-leading-zero); color: #9aa9b7; font-family: var(--mono); font-size: 9px; padding-top: 3px; }
+.flow-list b { color: #0066cc; font-family: var(--mono); font-size: 9px; font-weight: 500; padding-top: 3px; }
+.flow-list p { font-size: 11px; line-height: 1.7; }
+.flow-note { margin-top: 10px !important; color: #0066cc !important; font-size: 11px !important; }
 .detail-source { margin-top: 8px !important; font-size: 10px !important; }
 .detail-source a { color: #0066cc; text-decoration: underline; text-underline-offset: 3px; }
 .quote-card .card-footer { min-width: 0; }
 @media (max-width: 800px) { .quote-detail { grid-template-columns: 1fr; gap: 15px; } }
-@media (max-width: 510px) { .tap-hint { font-size: 7px; }.quote-detail { padding-top: 14px; }.detail-block p { font-size: 11px; line-height: 1.75; }.context-line { grid-template-columns: 35px minmax(0, 1fr); gap: 8px; padding: 8px; } }
+@media (max-width: 510px) { .tap-hint { font-size: 7px; }.quote-detail { padding-top: 14px; }.detail-block p { font-size: 11px; line-height: 1.75; }.flow-list li { grid-template-columns: 24px 62px minmax(0, 1fr); gap: 7px; padding: 8px; } }
 
 /* Audio controls for the supplied press-conference recording. */
 .audio-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; padding: 66px 0; }
