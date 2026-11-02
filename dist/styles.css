@@ -102,3 +102,18 @@ body { background: #fff; color: var(--ink); }
 .event-meta span:first-child { color: #0066cc; }
 .event-meta span + span { padding-left: 16px; border-left: 1px solid #e0e0e0; }
 @media (max-width: 510px) { .event-meta { display: block; }.event-meta span { display: block; }.event-meta span + span { margin-top: 7px; padding-left: 0; border-left: 0; } }
+
+/* Tap-to-open context cards. */
+.quote-card { cursor: pointer; }
+.quote-card:focus-visible { outline: 3px solid rgba(0, 102, 204, .24); outline-offset: 3px; }
+.quote-card.is-open { border-color: #0066cc; background: #fafafc; }
+.quote-card.is-open .tap-hint { color: #0066cc; }
+.tap-hint { color: #9a9a9a; font-family: var(--mono); font-size: 8px; letter-spacing: .04em; }
+.quote-detail { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; border-top: 1px solid #e0e0e0; padding: 17px 0 2px; margin-top: 2px; }
+.detail-block span { display: block; color: #0066cc; font-family: var(--mono); font-size: 9px; letter-spacing: .05em; margin-bottom: 7px; }
+.detail-block p { margin: 0; color: #5f5f63; font-size: 12px; line-height: 1.8; }
+.detail-source { margin-top: 8px !important; font-size: 10px !important; }
+.detail-source a { color: #0066cc; text-decoration: underline; text-underline-offset: 3px; }
+.quote-card .card-footer { min-width: 0; }
+@media (max-width: 800px) { .quote-detail { grid-template-columns: 1fr; gap: 15px; } }
+@media (max-width: 510px) { .tap-hint { font-size: 7px; }.quote-detail { padding-top: 14px; }.detail-block p { font-size: 11px; line-height: 1.75; } }
