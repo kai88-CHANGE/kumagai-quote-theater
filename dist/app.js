@@ -38,14 +38,22 @@ const search = document.querySelector('#searchInput');
 const toast = document.querySelector('#toast');
 let activeFilter = 'all';
 
+function timeToSeconds(value) {
+  const match = value?.match(/(\d+):(\d{2}):(\d{2})/);
+  if (!match) return null;
+  return Number(match[1]) * 3600 + Number(match[2]) * 60 + Number(match[3]);
+}
+
 function cardTemplate(item, index) {
   const detailId = `quote-detail-${index}`;
   const source = item.sourceUrl ? `<a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">${item.sourceLabel} ↗</a>` : '';
   const life = item.life ? `<div class="detail-block"><span>人物・哲学からの補足</span><p>${item.life}</p>${source ? `<p class="detail-source">${source}</p>` : ''}</div>` : '';
+  const audioTime = timeToSeconds(item.time);
+  const listen = audioTime === null ? '' : `<button class="quote-audio-btn" data-play-at="${audioTime}" type="button">▶ 聴く</button>`;
   return `<article class="quote-card ${item.hot ? 'standout' : ''}" data-index="${index}" tabindex="0" role="button" aria-expanded="false" aria-controls="${detailId}">
     <span class="rank">${String(index + 1).padStart(2, '0')}</span>
     <div class="quote-main"><div class="card-tag">${item.tag}</div><blockquote>「${item.text}」</blockquote></div>
-    <div class="card-footer"><span class="source">${item.note}</span><span class="tap-hint">TAP DETAILS</span><button class="copy-btn" data-copy="${escapeAttr(item.text)}" type="button">COPY ⧉</button></div>
+    <div class="card-footer"><span class="source">${item.note}</span><span class="tap-hint">TAP DETAILS</span>${listen}<button class="copy-btn" data-copy="${escapeAttr(item.text)}" type="button">COPY ⧉</button></div>
     <div class="quote-detail" id="${detailId}" hidden>
       <div class="detail-block"><span>会見での背景 ${item.time ? `／ ${item.time}` : ''}</span><p>${item.scene}</p></div>
       <div class="detail-block"><span>この一言の見どころ</span><p>${item.meaning}</p></div>
@@ -84,6 +92,56 @@ async function copyText(text, button) {
   showToast();
 }
 
+const conferenceAudio = document.querySelector('#conferenceAudio');
+const audioToggle = document.querySelector('#audioToggle');
+const audioProgress = document.querySelector('#audioProgress');
+const audioStatus = document.querySelector('#audioStatus');
+const audioCurrent = document.querySelector('#audioCurrent');
+const audioDuration = document.querySelector('#audioDuration');
+
+function formatAudioTime(seconds) {
+  if (!Number.isFinite(seconds)) return '--:--';
+  const total = Math.max(0, Math.floor(seconds));
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60).toString().padStart(2, '0');
+  const secs = (total % 60).toString().padStart(2, '0');
+  return hours ? `${hours}:${minutes}:${secs}` : `${minutes}:${secs}`;
+}
+
+function syncAudioUI() {
+  if (!conferenceAudio) return;
+  const playing = !conferenceAudio.paused && !conferenceAudio.ended;
+  audioToggle?.setAttribute('aria-pressed', String(playing));
+  if (audioToggle) audioToggle.querySelector('.audio-play').textContent = playing ? 'Ⅱ' : '▶';
+  if (audioStatus) audioStatus.textContent = playing ? '再生中' : (conferenceAudio.ended ? '再生完了' : '停止中');
+  if (audioCurrent) audioCurrent.textContent = formatAudioTime(conferenceAudio.currentTime);
+  if (audioDuration) audioDuration.textContent = formatAudioTime(conferenceAudio.duration);
+  if (audioProgress && Number.isFinite(conferenceAudio.duration) && conferenceAudio.duration > 0) audioProgress.value = String((conferenceAudio.currentTime / conferenceAudio.duration) * 100);
+}
+
+async function playAudioAt(seconds = null) {
+  if (!conferenceAudio) return;
+  if (Number.isFinite(seconds)) conferenceAudio.currentTime = Math.min(seconds, conferenceAudio.duration || seconds);
+  try { await conferenceAudio.play(); }
+  catch { showToast('音声を再生できませんでした'); }
+  syncAudioUI();
+}
+
+audioToggle?.addEventListener('click', () => {
+  if (conferenceAudio?.paused) playAudioAt();
+  else conferenceAudio?.pause();
+  syncAudioUI();
+});
+audioProgress?.addEventListener('input', () => {
+  if (conferenceAudio && Number.isFinite(conferenceAudio.duration)) conferenceAudio.currentTime = conferenceAudio.duration * (Number(audioProgress.value) / 100);
+  syncAudioUI();
+});
+conferenceAudio?.addEventListener('loadedmetadata', syncAudioUI);
+conferenceAudio?.addEventListener('timeupdate', syncAudioUI);
+conferenceAudio?.addEventListener('play', syncAudioUI);
+conferenceAudio?.addEventListener('pause', syncAudioUI);
+conferenceAudio?.addEventListener('ended', syncAudioUI);
+
 function toggleCard(card, force) {
   const detail = card.querySelector('.quote-detail');
   const open = force ?? detail.hidden;
@@ -119,6 +177,8 @@ document.querySelector('#randomHero').addEventListener('click', randomQuote);
 document.addEventListener('click', (event) => {
   const copyButton = event.target.closest('[data-copy]');
   if (copyButton) { event.stopPropagation(); copyText(copyButton.dataset.copy, copyButton); return; }
+  const audioButton = event.target.closest('[data-play-at]');
+  if (audioButton) { event.stopPropagation(); playAudioAt(Number(audioButton.dataset.playAt)); return; }
   const card = event.target.closest('.quote-card');
   if (card && !event.target.closest('.quote-detail')) toggleCard(card);
 });

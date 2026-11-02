@@ -51,6 +51,23 @@
         </div>
       </section>
 
+      <section class="audio-panel wrap" id="audio" aria-labelledby="audio-title">
+        <div class="audio-copy">
+          <p class="eyebrow">LISTEN TO THE PRESS CONFERENCE</p>
+          <h2 id="audio-title">会見の声を、<br /><span>そのまま聴く。</span></h2>
+          <p>提供された2026年11月2日の会見音声です。語録カードの「聴く」から、該当時刻付近を再生できます。</p>
+        </div>
+        <div class="audio-control">
+          <button class="audio-toggle" id="audioToggle" type="button" aria-pressed="false">
+            <span class="audio-play">▶</span>
+            <span><strong>会見音声を再生</strong><small>2026.11.02 · 全体音声</small></span>
+          </button>
+          <input class="audio-progress" id="audioProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="音声の再生位置" />
+          <div class="audio-time"><span id="audioStatus">停止中</span><span><b id="audioCurrent">00:00</b> / <b id="audioDuration">--:--</b></span></div>
+          <audio id="conferenceAudio" preload="metadata" src="assets/gmo-press-conference.mp3"></audio>
+        </div>
+      </section>
+
       <section class="stats wrap" aria-label="語録集の概要">
         <div><strong>28</strong><span>選りすぐりの語録</span></div>
         <div><strong>04</strong><span>気分で選べるジャンル</span></div>
