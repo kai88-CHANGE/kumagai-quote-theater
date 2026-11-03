@@ -103,6 +103,7 @@ function escapeAttr(value) {
 }
 
 function render() {
+  if (!grid || !search || !empty) return;
   const needle = search.value.trim().toLowerCase();
   const filtered = quotes.filter((item) => {
     const matchesFilter = activeFilter === 'all' || item.cat === activeFilter;
@@ -225,17 +226,17 @@ function randomQuote() {
   if (card) { toggleCard(card, true); card.classList.add('random-picked'); setTimeout(() => card.classList.remove('random-picked'), 1200); }
 }
 
-document.querySelector('#filters').addEventListener('click', (event) => {
+document.querySelector('#filters')?.addEventListener('click', (event) => {
   const button = event.target.closest('.filter');
   if (!button) return;
   activeFilter = button.dataset.filter;
   document.querySelectorAll('.filter').forEach((item) => { item.classList.toggle('active', item === button); item.setAttribute('aria-selected', item === button); });
   render();
 });
-search.addEventListener('input', render);
-document.querySelector('#clearSearch').addEventListener('click', () => { search.value = ''; activeFilter = 'all'; document.querySelector('[data-filter="all"]').click(); });
-document.querySelector('#randomTop').addEventListener('click', randomQuote);
-document.querySelector('#randomHero').addEventListener('click', randomQuote);
+search?.addEventListener('input', render);
+document.querySelector('#clearSearch')?.addEventListener('click', () => { search.value = ''; activeFilter = 'all'; document.querySelector('[data-filter="all"]')?.click(); });
+document.querySelector('#randomTop')?.addEventListener('click', randomQuote);
+document.querySelector('#randomHero')?.addEventListener('click', randomQuote);
 document.addEventListener('click', (event) => {
   const copyButton = event.target.closest('[data-copy]');
   if (copyButton) { event.stopPropagation(); copyText(copyButton.dataset.copy, copyButton); return; }

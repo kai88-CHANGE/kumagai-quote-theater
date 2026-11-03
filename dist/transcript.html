@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="GMO不正アクセス説明会の全文文字起こし。発言者・時刻で整理し、検索できます。" />
+    <title>会見の全文 — 熊谷語録劇場</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="熊谷語録劇場 ホーム">
+        <span class="brand-mark">K</span>
+        <span><strong>熊谷語録劇場</strong><small>THE QUOTE THEATER</small></span>
+      </a>
+      <nav class="top-nav" aria-label="メインナビゲーション">
+        <a href="index.html#quotes">語録を探す</a>
+        <a href="transcript.html" aria-current="page">全文</a>
+        <a href="index.html#about">このサイトについて</a>
+      </nav>
+      <a class="outline-btn transcript-home-btn" href="index.html">← 語録へ戻る</a>
+    </header>
+
+    <main>
+      <section class="transcript-section wrap" id="transcript">
+        <div class="section-heading transcript-heading">
+          <div>
+            <p class="eyebrow">FULL CONFERENCE TRANSCRIPT</p>
+            <h1 class="transcript-title">会見の<br /><span>全文。</span></h1>
+          </div>
+          <p class="section-intro">添付資料のタイムスタンプを保ったまま、<br />発言者を読みやすく整えました。検索もできます。</p>
+        </div>
+
+        <div class="transcript-note">
+          <strong>読み方</strong>
+          <span>経営陣は氏名、記者は「記者1」形式で表示しています。氏名は自己紹介・会見内の呼びかけ・公開情報を照合し、判別が難しい箇所は記者番号を残しています。発言本文は添付文字起こしをもとに掲載しています。</span>
+        </div>
+
+        <div class="transcript-toolbar">
+          <label class="search-box"><span>⌕</span><input id="transcriptSearch" type="search" placeholder="全文から検索…" autocomplete="off" /></label>
+          <div class="filter-row" id="transcriptFilters" role="tablist" aria-label="話者の種類で絞り込む">
+            <button class="filter active" data-transcript-filter="all" role="tab" aria-selected="true">全文 <b>374</b></button>
+            <button class="filter" data-transcript-filter="management" role="tab">経営陣</button>
+            <button class="filter" data-transcript-filter="press" role="tab">記者</button>
+            <button class="filter" data-transcript-filter="host" role="tab">司会</button>
+          </div>
+        </div>
+
+        <div class="transcript-meta" id="transcriptMeta" aria-live="polite"></div>
+        <div class="transcript-list" id="transcriptList" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer wrap"><span>熊谷語録劇場</span><span>Not an official GMO site · 2026</span></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite">コピーしました</div>
+    <script src="transcript.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

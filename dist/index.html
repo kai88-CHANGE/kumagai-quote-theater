@@ -20,7 +20,7 @@
       </a>
       <nav class="top-nav" aria-label="メインナビゲーション">
         <a href="#quotes">語録を探す</a>
-        <a href="#transcript">全文</a>
+        <a href="transcript.html">全文</a>
         <a href="#about">このサイトについて</a>
       </nav>
       <button class="outline-btn" id="randomTop" type="button"><span>✦</span> 一本引く</button>
@@ -76,34 +76,6 @@
         <div class="stats-note">本人発言を中心に、会見の文脈が分かるよう整理。<br />タップすると背景・見どころ・人物哲学の補足が開きます。</div>
       </section>
 
-      <section class="transcript-section wrap" id="transcript">
-        <div class="section-heading transcript-heading">
-          <div>
-            <p class="eyebrow">FULL CONFERENCE TRANSCRIPT</p>
-            <h2>会見の<br /><span>全文。</span></h2>
-          </div>
-          <p class="section-intro">添付資料のタイムスタンプを保ったまま、<br />発言者を読みやすく整えました。検索もできます。</p>
-        </div>
-
-        <div class="transcript-note">
-          <strong>読み方</strong>
-          <span>経営陣は氏名、記者は「記者1」形式で表示しています。氏名は自己紹介・会見内の呼びかけ・公開情報を照合し、判別が難しい箇所は記者番号を残しています。発言本文は添付文字起こしをもとに掲載しています。</span>
-        </div>
-
-        <div class="transcript-toolbar">
-          <label class="search-box"><span>⌕</span><input id="transcriptSearch" type="search" placeholder="全文から検索…" autocomplete="off" /></label>
-          <div class="filter-row" id="transcriptFilters" role="tablist" aria-label="話者の種類で絞り込む">
-            <button class="filter active" data-transcript-filter="all" role="tab" aria-selected="true">全文 <b>374</b></button>
-            <button class="filter" data-transcript-filter="management" role="tab">経営陣</button>
-            <button class="filter" data-transcript-filter="press" role="tab">記者</button>
-            <button class="filter" data-transcript-filter="host" role="tab">司会</button>
-          </div>
-        </div>
-
-        <div class="transcript-meta" id="transcriptMeta" aria-live="polite"></div>
-        <div class="transcript-list" id="transcriptList" aria-live="polite"></div>
-      </section>
-
       <section class="quotes-section wrap" id="quotes">
         <div class="section-heading">
           <div>
@@ -140,7 +112,6 @@
 
     <footer class="site-footer wrap"><span>熊谷語録劇場</span><span>Not an official GMO site · 2026</span></footer>
     <div class="toast" id="toast" role="status" aria-live="polite">コピーしました</div>
-    <script src="transcript.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
