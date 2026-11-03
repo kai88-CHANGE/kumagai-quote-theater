@@ -247,4 +247,52 @@ document.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('.quote-card')) { event.preventDefault(); toggleCard(event.target); }
 });
+
+const transcriptBlocks = window.transcriptBlocks || [];
+const transcriptList = document.querySelector('#transcriptList');
+const transcriptMeta = document.querySelector('#transcriptMeta');
+const transcriptSearch = document.querySelector('#transcriptSearch');
+let activeTranscriptFilter = 'all';
+
+function escapeHtml(value = '') {
+  return String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
+}
+
+function transcriptTemplate(item, index) {
+  const searchable = `${item.speaker} ${item.text}`.toLowerCase();
+  return `<article class="transcript-line ${item.kind}" data-transcript-index="${index}" data-searchable="${escapeHtml(searchable)}">
+    <div class="transcript-meta"><strong>${escapeHtml(item.speaker)}</strong><time>${escapeHtml(item.time)}</time></div>
+    <p>${escapeHtml(item.text)}</p>
+  </article>`;
+}
+
+function renderTranscript() {
+  if (!transcriptList) return;
+  const query = (transcriptSearch?.value || '').trim().toLowerCase();
+  const filtered = transcriptBlocks.filter((item) => {
+    const matchesFilter = activeTranscriptFilter === 'all' || item.kind === activeTranscriptFilter;
+    const matchesSearch = !query || `${item.speaker} ${item.text}`.toLowerCase().includes(query);
+    return matchesFilter && matchesSearch;
+  });
+  transcriptList.innerHTML = filtered.map((item) => transcriptTemplate(item, transcriptBlocks.indexOf(item))).join('');
+  if (transcriptMeta) {
+    transcriptMeta.textContent = query || activeTranscriptFilter !== 'all'
+      ? `${filtered.length}件を表示 ／ 全${transcriptBlocks.length}件`
+      : `全${transcriptBlocks.length}件 ／ 2026.11.02 · 00:00:00–03:25:04`;
+  }
+}
+
+document.querySelector('#transcriptFilters')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-transcript-filter]');
+  if (!button) return;
+  activeTranscriptFilter = button.dataset.transcriptFilter;
+  document.querySelectorAll('#transcriptFilters [data-transcript-filter]').forEach((item) => {
+    const selected = item === button;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-selected', String(selected));
+  });
+  renderTranscript();
+});
+transcriptSearch?.addEventListener('input', renderTranscript);
 render();
+renderTranscript();
